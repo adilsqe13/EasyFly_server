@@ -8,9 +8,11 @@ const fetchadmin = require('../../middleware/fetchadmin');
 
 router.post('/add-flight', fetchadmin, async (req, res) => {
   try {
-    const { companyName, flightNumber, from, to, time, seating_capacity, price } = req.body
+    let { companyName, flightNumber, from, to, time, seating_capacity, price } = req.body
+    let From = from.toUpperCase();
+    let To = to.toUpperCase();
     const flight = new Flight({
-     companyName, flightNumber, seating_capacity, price, from, to, time
+     companyName, flightNumber, seating_capacity, price, From, To, time
     })
     const saveFlight = await flight.save()
     res.json({ success: true, saveFlight });

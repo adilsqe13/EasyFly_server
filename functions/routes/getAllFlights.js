@@ -15,8 +15,10 @@ router.get("/get-all-flights", async (req, res) => {
 
 router.post("/get-searched-flights", async (req, res) => {
   try {
-    const {from , to} = req.body;
-    const allFlights = await Flights.find({from, to});
+    let {from , to} = req.body;
+    let From = from.toUpperCase();
+    let To = to.toUpperCase();
+    const allFlights = await Flights.find({from: From, to: To});
     res.json(allFlights);
   } catch (error) {
     console.log(error.message);
